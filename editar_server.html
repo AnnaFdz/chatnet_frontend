@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Server</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="editar_server.html" class="logo" style="text-decoration: none;"><h2>ChatNet</h2></a>
+        <nav class="navigation">
+            <a href="inicio.html" class="icon"><ion-icon name="home" style="height: 40px; width: 40px;"></ion-icon></a>
+            
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" class="icon"><ion-icon name="options" style="height: 40px; width: 40px; color: #fe7563;"></ion-icon>
+
+                 
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" id="miPerfil">Mi perfil</a></li>
+                  <li><a href="#" id="editarPerfil">Editar perfil</a></li>
+                  <li><hr /></li>
+                  <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+              </div>
+              
+              
+        </nav>
+    </header>
+
+    <div class="wrapper_editar_perfil">
+        
+        <div class="form-box editar">
+            <h2>Editar Servidor</h2>
+            <form action="#"  id="editar-servidor-form" method="post" enctype="multipart/form-data">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="hammer"></ion-icon></span>
+                    <input type="text"  id="nombre_servidor" required>
+                    <label>Nombre del Servidor</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="chatbubbles"></ion-icon></span>
+                    <input type="text"  id="descripcion" >
+                    <label>Descripcion</label>
+                </div>
+                <div class="input-box">
+                    <label class="form-label">Imagen Actual del Servidor</label>
+                    <img src="" class="avatar" alt="Server Image" id="imagen_servidor">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="image"></ion-icon></span>
+                    <input type="file" accept="image/*" id="formFile">
+                    <label>Imagen del Servidor</label>
+                </div>
+                
+                <button type="submit" class="btn">Editar</button>
+                
+                <div id="message"></div>
+            </form>
+            <div style="margin: 10px 0; width: 100%;">
+                <a href="inicio.html"  ><button class="btn" >Volver</button></a>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="script_editar_servidor.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+   
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatNet Perfil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="profile.html" class="logo" style="text-decoration: none;"><h2>ChatNet</h2></a>
+        <nav class="navigation">
+            <a href="inicio.html" class="icon"><ion-icon name="home" style="height: 40px; width: 40px;"></ion-icon></a>
+            
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" class="icon"><ion-icon name="options" style="height: 40px; width: 40px; color: #fe7563;"></ion-icon>
+
+                  <!-- <span id="usuario-format">Nombre de Usuario</span>
+                  <img src="imagen/perfil/1" alt="foto-perfil" width="35" height="35" class="rounded-circle" id="img-cover"  onerror="this.src='img/fotoDefault.jpg'" /> -->
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" id="miPerfil">Mi perfil</a></li>
+                  <li><a href="#" id="editarPerfil">Editar perfil</a></li>
+                  <li><hr /></li>
+                  <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+              </div>
+              
+              
+        </nav>
+    </header>
+    
+
+
+
+<div class="wrapper_perfil" >
+        
+        
+    <div class="form-box perfil">
+        <h2>Perfil de Usuario</h2>
+        <div class="input-box">
+        <p><strong>Username:</strong> <span id="username"></span></p>
+        </div>
+        <div class="input-box">
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        </div>
+        <div class="input-box">
+        <p><strong>Nombre Completo:</strong> <span id="nombre_completo"></span></p>
+        </div>
+        <div class="input-box" style="margin: 40px 0; width: 100%;
+                height: 60px;">
+            <label class="form-label"><strong>Foto de Perfil:</strong> </label>
+        <!-- <p><strong>Avatar:</strong> <span id="imagen_de_perfil"></span></p> -->
+        <img src="" class="avatar" alt="Foto de perfil" id="imagen_de_perfil">
+
+        </div>
+            
+        <a href="inicio.html"  ><button class="btn" >Volver</button></a>
+    
+        
+        <div id="message"></div>
+        
+    </div>
+
+    
+
+    <script src="script_perfil.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

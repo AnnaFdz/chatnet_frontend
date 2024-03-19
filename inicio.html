@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatNet</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Materialize CSS from CDN
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+
+
+</head>
+
+    
+<body>
+
+    <header>
+        <a href="inicio.html" class="logo" style="text-decoration: none;"><h2>ChatNet</h2></a>
+        <nav class="navigation">
+            <a href="inicio.html" class="icon_home"><ion-icon name="home" style="height: 40px; width: 40px;"></ion-icon></a>
+            
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" class="icon_drop"><ion-icon name="options" style="height: 40px; width: 40px; color: #fe7563;"></ion-icon>
+
+                  
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" id="miPerfil">Mi perfil</a></li>
+                  <li><a href="#" id="editarPerfil">Editar perfil</a></li>
+                  
+                  
+                  <li><hr /></li>
+                  <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+              </div>
+              
+              
+        </nav>
+    </header>
+    <div class="wrapper_columnas">
+        <section>
+        <!-- Columna de Servidores -->
+        <div class="columna servidores">
+            <div class="top_servidores">
+                <h3>Servidores</h3>
+                <!-- <span id="icon-buscar" class="icon-buscar"><ion-icon name="compass" ></ion-icon></span> -->
+                <img class="icon-buscar" id="icon-buscar" src="icons\explore servers.png" alt="" title="Exploar Servidores">          
+                
+            <button class="btn" id="crear-servidor">Crear Servidor</button>
+            <!-- <img class="icon-buscar" id="crear-servidor" src="icons\add server.png" alt="" title="Crear servidores" style="width: 70px; height: 70px;"> -->
+
+                
+            </div>
+            <div class="servidores_usuarios" id="servidores_usuarios">
+
+                <ul id="lista-servidores">
+                    <!-- Los servidores se llenarán aquí dinámicamente -->
+                </ul>
+            </div>
+            <!-- info del usuario logeado   -->
+            <div class="usuario">
+                <div>
+                <img src="" class="avatar" alt="Foto de perfil" id="imagen_de_perfil">
+            </div>
+                
+            <div >
+                <p> <span id="username"></span></p>
+                </div>
+                <div id="message" ></div>
+            </div>
+            
+        </div>
+
+        <!-- Columna de Canales -->
+        <div class="columna canales" id="canales">
+            <div class="top_canales">
+                <h3>Canales</h3>
+               
+                <button class="btn" id="crear-canal" style="display: none;">Crear Canal</button> 
+            </div>
+            <div class="servidor_canales">
+                <div id="messageC" ></div>
+            <ul id="lista-canales">
+                
+                <!-- Los canales se llenarán aquí dinámicamente -->
+            </ul>
+            </div>
+        </div>
+
+        <!-- Columna de Mensajes -->
+        <div class="columna mensajes">
+            <div class="top_mensajes">
+                <h3>Mensajes</h3>
+            
+            </div>
+            <div class="canal_mensajes" id="canal_mensajes">
+                <div id="messageM" class="messageM"></div>
+            <ul id="lista-mensajes" class="lista-mensajes">
+                
+                <!-- Los mensajes se llenarán aquí dinámicamente -->
+            </ul>
+            <input id="mensaje-nuevo" placeholder="Escribe un mensaje...">
+            <button class="btn" id="enviar-mensaje">Enviar</button>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Modales para agregar servidores, explorar servidores -->
+    <div id="addServerModal" class="modal">
+        <!-- Contenido del modal para agregar servidores -->
+       
+    </div>
+    <!-- Modal con la informacion del servidor -->
+    <div id="serverModal" class="modal">
+        <div><a style="padding: 1%;" class="modal-close  waves-green btn-flat icon-close "><ion-icon name="close"></ion-icon></a></div>
+    <div style="padding-top: 15%;" class="modal-content">
+        <!-- <div><a  class="modal-close  waves-green btn-flat icon-close "><ion-icon name="close"></ion-icon></a></div> -->
+      <h4>Informacion del Servidor</h4>
+      <p id="serverName"></p>
+      <p id="serverDescription"></p>
+      <p id="creadorId"></p>
+        <div >
+        <img id="serverImage" src="" alt="Server Image"class="icon"style="height: 100px; width: 100px;">
+        </div>
+     
+    </div>
+    <div class="modal-footer">
+        <div><a style="font-weight: 600; cursor: pointer;" id="editarServidor">Editar Servidor</a></div>
+        <!-- <div><a  class="modal-close waves-effect waves-green btn-flat">Cerrar</a></div> -->
+      
+    </div>
+  </div>
+  
+    <!-- <div class="modal-footer">
+      <a  class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div> -->
+  <!-- </div> -->
+  <div id="search-container" class="modal" style=" width: 30%; margin: 5px;">
+    <div><span class="icon-close" id="closeModal"><ion-icon name="close"></ion-icon></span></div>
+    
+    <label for="searchInput" style="display: flex; justify-content: space-between; padding: 15px; font-weight: 500; " >Buscar Servidor <ion-icon name="search"></ion-icon></label>
+    <input type="text" id="searchInput" placeholder="Presionar enter para buscar...">
+    <div class="searchResultsContainer" >
+       
+    <button class="btn" id="mostrar-todos">Mostrar todos</button> 
+          <!-- todos los servidores aqui   -->
+    </div>
+
+</div>
+ <!-- resultado de la busqueda aqui   -->
+<div id="searchModal" class="modal">
+    <span class="icon-close" id="closeModal2"><ion-icon name="close"></ion-icon></span>
+    <div id="modalBusqueda" class="modal-content"></div>
+    
+    
+</div>
+<!-- modal unirse a servidor   -->
+<div id="modalJoin" class="modal" style=" width: 30%; height: 30%; margin: 5px;">
+    <span class="icon-close" id="closeModal3"><ion-icon name="close"></ion-icon></span>
+    <div class="modal-content" >
+        <div id="messageAdd"></div>
+        <div id="accept" class="btn">Aceptar</div>
+    </div>
+    
+    
+</div>
+<!-- modal crear canal   -->
+    <div id="createChannelModal" class="modal">
+        <span class="icon-close" id="closeModal4"><ion-icon name="close"></ion-icon></span>
+        <div class="modal-content">
+            
+            
+            <h2>Crear Nuevo Canal</h2>
+            <label for="nombre_canal">Nombre del Canal:</label>
+            <input type="text" id="nombre_canal" required>
+            <label for="descripcion">Descripcion:</label>
+            <input type="text" id="descripcion" required>
+            <button id="confirmCanal">Confirmar</button>
+            <div id="messageCrearC" ></div>
+        </div>
+    </div>
+    
+</section>
+      
+    <div id="message"></div>
+     <!-- Modal para crear servidor -->
+    <div class="modal" id="crearServidorModal">
+        <span class="icon-close" id="closeModal1"><ion-icon name="close"></ion-icon></span>
+        <div class="modal-content">
+            
+            
+            <h2>Crear Nuevo Servidor</h2>
+            <label for="nombre_servidor">Nombre del Servidor:</label>
+            <input type="text" id="nombre_servidor" required>
+            <label for="descripcion">Descripcion:</label>
+            <input type="text" id="descripcion" required>
+            <button id="confirmServer">Confirmar</button>
+            <div id="messageCrear" ></div>
+        </div>
+    </div>
+  <!-- footer -->
+    <footer style="background: none;">
+       <div class="botton">
+        <ul class="social-icon">
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a></li>
+             
+          </ul>
+          <p>&copy;2024 Ana Fernandez | All Rights Reserved</p>
+       </div>
+        
+</footer>
+    <script src="script_inicio.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // Initialize Materialize components if needed
+          M.AutoInit();
+        });
+    </script>
+      
+    <!-- Materialize JS from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    
+</body>
+</html>

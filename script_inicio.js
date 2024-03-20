@@ -396,7 +396,7 @@ function getServerInformation(nombre_servidor) {
     .then(response => {
         if (response.status === 200) {
             return response.json().then(serverInfo => {
-                console.log('Server Information getServerI:', serverInfo);
+                // console.log('Server Information getServerI:', serverInfo);
                 // Call the displayServerInformation function with the retrieved serverInfo
                 displayServerInformation(serverInfo);
             });
@@ -412,36 +412,20 @@ function getServerInformation(nombre_servidor) {
 }
 
 
-// function displayServerInformation(serverInfo) {
-//     // Implement logic to display server information on your page
-//     // You can use a modal, update an existing section, etc.
-//     console.log('Server Information:', serverInfo);
-//     // Example: alert(`Server Information:\nName: ${serverInfo.nombre_servidor}\nDescription: ${serverInfo.descripcion}`);
-// }
 function displayServerInformation(serverInfo) {
-    console.log('Server Information:', serverInfo);
+    // console.log('Server Information:', serverInfo);
 
-    // // Check if the serverInfo contains serialized_info (for old servers) or not (for new servers)
-    // const info = serverInfo.serialized_info || serverInfo;
-    // // Extract relevant information
-    // const servidor = serverInfo.servidor;
-    // const allUsers = serverInfo.allUsers;
-    
-    // // Find the creator object using the creator_id from the server information
-    // const creator = allUsers.find(user => user.usuario_id === servidor.creador_id);
-    // console.log('credor get 1', creator)
-    // // Check if creator is found
-    // const creatorUsername = creator ? creator.username : 'Desconocido';
+  
 
-     // Extract relevant information
+     // extrae informacion relevante
      const servidor = serverInfo.servidor;
      const allUsersData = serverInfo.allUsers[0];
  
-     // Function to replace 'creador_id' with 'creador_username'
+     // remplaza'creador_id' por 'creador_username'
      const replaceCreadorUsername = (server) => {
          const creadorId = server.creador_id;
  
-         // Use allUsersData to find the user
+         // Usa allUsersData para encontrar al usuario creador
          const creador = allUsersData.find(usuario => usuario.usuario_id === creadorId);
  
          if (creador) {
@@ -450,29 +434,29 @@ function displayServerInformation(serverInfo) {
          return server;
      };
  
-     // Apply the function to the server
+     // aplica la funcion al servidor
      const updatedServer = replaceCreadorUsername(servidor);
      
-    // Update modal content
+    // Actualiza el contenido del modal 
     document.getElementById('serverName').textContent = `Nombre: ${updatedServer.nombre_servidor}`;
     
     
     document.getElementById('serverDescription').textContent = `Descripción: ${updatedServer.descripcion || 'No hay descripción disponible'}`;
     document.getElementById('creadorId').textContent = `Creador :  ${updatedServer.creador_username}`;
   
-    // Update server image
+    // Actualiza la imagen del servidor
     localStorage.setItem('servidor_id', updatedServer.servidor_id);
     localStorage.setItem('nombre_servidor', updatedServer.nombre_servidor);
     const nombre_servidor = localStorage.getItem('nombre_servidor');
     const serverImageElement = document.getElementById('serverImage');
-    serverImageElement.src =`http://127.0.0.1:5000/servidor/imgserv/${nombre_servidor}`;  // Provide a default image URL if not available
+    serverImageElement.src =`http://127.0.0.1:5000/servidor/imgserv/${nombre_servidor}`; 
    
     document.getElementById("editarServidor").addEventListener("click", function () {
         
         
         window.location.href = `editar_server.html`; // Cambia la URL según tu ruta de edición de perfil
     });
-    // Open the modal
+    // Abre modal
     const modal = M.Modal.getInstance(document.getElementById('serverModal'));
     modal.open();
 }
@@ -492,33 +476,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function displaySearchServer() {
    
-    // Open the modal
+    // Abre modal
     const modalS = M.Modal.getInstance(document.getElementById('search-container'));
     modalS.open();
     const closeModalBtn = document.getElementById('closeModal');
     closeModalBtn.addEventListener('click', function () {
         const searchResultsContainer = document.querySelector('.searchResultsContainer');
-            
+            //Limpia la busqueda
         searchResultsContainer.innerHTML = '';
-        // Close the modal
+        // Cierra  modal
         modalS.close();
         // modal.style.display = 'none';
         
     });
     const mostrarTodosBtn = document.getElementById('mostrar-todos');
     mostrarTodosBtn.addEventListener('click', function () {
-        // Fetch all servers (replace this with your actual API endpoint)
+        
         fetchAllServers()
             .then((servers) => {
                 //console.log("servers fetch all in", servers)
-                // Clear existing content
+                // Limpia la busqueda
                 const searchResultsContainer = document.querySelector('.searchResultsContainer');
                 // console.log('Container Element:', searchResultsContainer);
                 searchResultsContainer.innerHTML = '';
 
-                // Append each server to the container
+                // agrega cada servidor ak container
                 servers.forEach((server) => {
-                    console.log("for each  server");
+                    // console.log("for each  server");
                     // const serverElement = createServerElement(server);
                     const serverElement = document.createElement('div');
                     const serverName = document.createElement('p');
@@ -618,19 +602,19 @@ function searchServer() {
         }
     })
     .then(data => {
-        console.log('Server data:', data);
-        // Function to replace 'creador_id' with 'creador_username'
+        // console.log('Server data:', data);
+        // remplaza 'creador_id' por 'creador_username'
         const replaceCreadorUsername = (server) => {
-            // Assuming the user data is in the first element of allUsers
+            
             const allUsersData = data.allUsers[0];
         
-            console.log('server re place', server);
+            // console.log('server re place', server);
             const creadorId = server.creador_id;
-            console.log('creadorId', creadorId);
+            // console.log('creadorId', creadorId);
             
             // Use allUsersData to find the user
             const creador = allUsersData.find(usuario => usuario.usuario_id === creadorId);
-            console.log('creador', creador);
+            // console.log('creador', creador);
         
             if (creador) {
                 return { ...server, creador_username: creador.username };
@@ -638,15 +622,15 @@ function searchServer() {
             return server;
         };
         
-        // Apply the function to each server in servidores array
+        // aplica la funcion a cada server del array servodores
         const updatedServidores = data.servidores.map(replaceCreadorUsername);
         
-        // Replace the original servidores array with the updated one
+        // Replaza servidores original con el actualizado
         data.servidores = updatedServidores;
-        console.log('data servidores', data.servidores);
+        // console.log('data servidores', data.servidores);
         
         const modalContent = document.getElementById("modalBusqueda");
-        modalContent.innerHTML = ''; // Clear existing content
+        modalContent.innerHTML = ''; // limpia
 
         if (data.servidores.length > 0) {
             const ulUsers = document.createElement('ul');
@@ -664,12 +648,12 @@ function searchServer() {
                 spanDescription.textContent = `Descripcion: ${servidor.descripcion}` || 'No hay descripcion disponible';
                 spanDescription.classList.add('descripcion');
                 const spanCreador = document.createElement('span');
-                spanCreador.textContent = `Creador: ${servidor.creador_username}`; // Use creador_username
+                spanCreador.textContent = `Creador: ${servidor.creador_username}`; 
                 spanCreador.classList.add('creador_id');
 
                 const liUsers = document.createElement('li');
                 const spanUsers = document.createElement('span');
-                spanUsers.textContent = `Usuarios vinculados: ${data.num_users.length}`; // Display the number of users
+                spanUsers.textContent = `Usuarios vinculados: ${data.num_users.length}`; 
                 spanUsers.classList.add('num_users');
                 liUsers.appendChild(spanUsers);
                 ulUsers.appendChild(liUsers);
@@ -980,7 +964,7 @@ function getMensajes(canal_id) {
     .then(response => {
         if (response.ok) {
             return response.json().then(dataM => {
-                // console.log("DataM:", dataM)
+                
                 const listaMensajes = document.getElementById('lista-mensajes');
                 const messageM = document.getElementById('messageM');
                 messageM.innerHTML = '';
@@ -1008,8 +992,22 @@ function getMensajes(canal_id) {
                         btnDelete.title= 'eliminar mensaje'
                         btnDelete.classList.add('icon_delete');
                         btnDelete.addEventListener('click', () => {
-                            // console.log("Clicked on message:", mensajes.mensaje_id);
-                            deleteMensaje( mensajes.mensaje_id, canal_id)
+                            uID = localStorage.getItem("id_usuario");
+                            if (mensajes.usuario_id == uID){
+                                if (confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
+                                    deleteMensaje(mensajes.mensaje_id, canal_id)
+                                    // console.log("Clicked on message:");
+                                }
+                            } else{
+                                alert("No puedes eliminar este mensaje, solo el creador del mensaje puede hacerlo.")
+                        
+                            // const messageElement = document.createElement('span');
+                            // messageElement.classList.add('message');
+                            // messageElement.textContent = 'No puedes eliminar este mensaje, solo el creador del mensaje puede hacerlo.';
+                            // messageM.appendChild(messageElement);
+                            }
+                           
+                           
                         });
                         div3Element.appendChild(btnDelete);
                         divElement.appendChild(div2Element);

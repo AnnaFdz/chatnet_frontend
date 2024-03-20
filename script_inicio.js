@@ -189,7 +189,7 @@ window.addEventListener('load', function () {
                             
                             //imgElement.src = "icons\\icon server.png";
                             // imgElement.src = "http://127.0.0.1:5000/servidor/img";
-                            imgElement.src =`http://127.0.0.1:5000/servidor/imgserv/${servidor.nombre_servidor}`|| "icons\\icon server.png";
+                            imgElement.src =`http://127.0.0.1:5000/servidor/imgserv/${servidor.nombre_servidor}`||"icons\\icon server.png";
                             
                             imgElement.alt = servidor.nombre_servidor;
                             imgElement.title = servidor.descripcion;
@@ -1169,7 +1169,7 @@ function getProfile() {
 
 
                 if (imagenDePerfilElement) {
-                    imagenDePerfilElement.src = "http://127.0.0.1:5000/usuario/img"|| "users\\ profile.png";
+                    imagenDePerfilElement.src = "http://127.0.0.1:5000/usuario/img"|| "users\\profile.png";
                 }
                 
             });

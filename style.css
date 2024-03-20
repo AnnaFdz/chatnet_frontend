@@ -678,7 +678,7 @@ section {
 }
 .lista-mensajes{
     max-height: 75%;
-    min-height: 75%;
+    min-height: 510px;
     
     display: flex;
     flex: 1;
@@ -741,8 +741,14 @@ html {
     border: 2px solid  #dc7f5f; /* Example border style for selected server */
     border-radius: 5px;
 }
+#enviar-mensaje {
+    width: 97%;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 1%;
+}
 #mensaje-nuevo{
-    width: 100%;
+    width: 97%;
     height: 45px;
     border-radius: 6px;
     font-weight: 500;
@@ -752,6 +758,12 @@ html {
     font-size: 1em;
     padding: 10px;
     color: #162938;
+    position: fixed;
+    bottom: 0;
+    top: 85%;
+}
+.messageM{
+    padding-left: 30%;
 }
 .usernameChat {
     font-size: .9em;
@@ -998,24 +1010,4 @@ button {
     cursor: pointer;
     margin: 10%;
 }
-/* Style the modal */
-/* .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; 
-     background-color: rgba(0, 0, 0, 0.8); 
-} */
 
-/* Style the modal content */
-/* .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-} */

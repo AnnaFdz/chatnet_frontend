@@ -436,6 +436,7 @@ function displayServerInformation(serverInfo) {
  
      // aplica la funcion al servidor
      const updatedServer = replaceCreadorUsername(servidor);
+    //  console.log('Server Information Updated:', updatedServer);
      
     // Actualiza el contenido del modal 
     document.getElementById('serverName').textContent = `Nombre: ${updatedServer.nombre_servidor}`;
@@ -450,12 +451,25 @@ function displayServerInformation(serverInfo) {
     const nombre_servidor = localStorage.getItem('nombre_servidor');
     const serverImageElement = document.getElementById('serverImage');
     serverImageElement.src =`http://127.0.0.1:5000/servidor/imgserv/${nombre_servidor}`; 
-   
+    
+    const dejarServer = document.getElementById('dejarServer');
+    dejarServer.textContent = 'Dejar Servidor';  
+    dejarServer.classList.add('dejar-server');
+    dejarServer.addEventListener('click', function () {
+        uID= localStorage.getItem('id_usuario');
+        // console.log('click dejar serv', updatedServer.servidor_id, uID );
+        deleteServidorUsuario(updatedServer.servidor_id, uID);
+        const modal = M.Modal.getInstance(document.getElementById('serverModal'));
+        modal.close();
+        
+    });
+    
     document.getElementById("editarServidor").addEventListener("click", function () {
         
         
         window.location.href = `editar_server.html`; // Cambia la URL según tu ruta de edición de perfil
     });
+   
     // Abre modal
     const modal = M.Modal.getInstance(document.getElementById('serverModal'));
     modal.open();
@@ -680,7 +694,7 @@ function searchServer() {
                     });
                     document.getElementById("messageAdd").innerHTML = `Quieres unirte a ${servidor.nombre_servidor}?`;
                     document.getElementById("accept").addEventListener('click',() => {
-                        console.log('Clicked "accept" button in modal');
+                        // console.log('Clicked "accept" button in modal');
                         fetch("http://127.0.0.1:5000/servidor/usuario_servidor", {
 
                             method: "GET",
@@ -692,7 +706,8 @@ function searchServer() {
                                     const exist = registered(data3, servidor.nombre_servidor);
                                     if (data3.length === 0 || exist === false) {
                                         registeruxs(servidor.nombre_servidor);
-                                        
+                                        modalJoin.style.display = 'none';
+                                        searchModal.style.display = 'none';
                                     } else {
                                         document.getElementById("messageAdd").innerHTML = 'Ya esta unido a este servidor';
                                     }
@@ -764,8 +779,10 @@ function registeruxs(nombre_servidor) {
     })
     .then(response => {
         if (response.status === 201) {
-            console.log(data4);
-            getServerInformation(data4.nombre_servidor);
+            //console.log(data4);
+            alert(`Bienvenido a ' ${nombre_servidor}`);
+            // getServerInformation(data4.nombre_servidor);
+            window.location.href = `inicio.html`; 
         } else {
             return response.json().then(data4 => {
                 console.log(data4.message);
@@ -1224,4 +1241,32 @@ function deleteMensaje(mensajeId, canal_id) {
         console.error('An error occurred while deleting message:', error);
     });
 }
+function deleteServidorUsuario(servidorId, usuarioId) {
+    fetch(`http://127.0.0.1:5000/servidor/remover_usuario/${servidorId}/${usuarioId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:5500'
+        },
+        credentials: 'include'
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Vinculo borrado exitosamente');
+            window.location.href = `inicio.html`; 
+            // return response.json();
+        } else {
+            console.error('Server returned an error:', response.status);
+            throw new Error('Server error');
+        }
+    })
+    .then(data => {
+        console.log('Link between server and user deleted successfully');
+        
+    })
+    .catch(error => {
+        console.error('Error during fetch:', error);
+    });
+}
+
 
